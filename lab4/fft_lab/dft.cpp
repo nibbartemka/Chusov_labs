@@ -94,17 +94,3 @@ std::chrono::duration<double> test_dft_time(std::vector<std::complex<double>> el
     std::chrono::duration<double> elapsed = time_end - time_start;
     return elapsed;
 }
-
-
-int main() {
-    std::vector<std::complex<double>> v(1<<5);
-
-    for (size_t i = 0; i < v.size() / 2; ++i) {
-        v[i] = v.rbegin()[i] = i;
-    }
-
-    auto elasped = test_dft_time(v);
-    std::cout << elasped.count();
-    return 0;
-
-}

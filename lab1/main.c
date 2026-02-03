@@ -22,7 +22,7 @@
 
 void speedtest_avg_openmp(
     const char* name,
-    double (*func)(const double*, unsigned int),
+    double (*func)(const double*, size_t),
     size_t n,
     size_t exp_count
 ) {

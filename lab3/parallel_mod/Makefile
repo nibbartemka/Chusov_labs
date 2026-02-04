@@ -4,15 +4,30 @@ endif
 ifeq ($(CXX), )
 CXX=g++
 endif
-ENV=CXX=$(CXX) OUTDIR=../bin/ "CXXFLAGS=$(CXXFLAGS)"
 
-.phony: all run clean
+SRC=$(wildcard *.cpp)
+OBJ=$(SRC:%.cpp=obj/%.o)
+DEP=$(OBJ:%.o=%.d)
 
-all:bin/run ;
+.phony: all clean
 
-bin/run:
-	make -C parallel_mod/ ../bin/run $(ENV)
-run: bin/run ;
+all:$(OUTDIR)run
+
+$(OUTDIR)run: $(OBJ) | $(OUTDIR)
+	$(CXX) $(CXXFLAGS) -pthread -fopenmp -ldl $^ -o $@
 
 clean:
-	make -C parallel_mod/ clean $(ENV)
+	rm -rf obj $(OUTDIR)run
+
+obj/%.o:%.cpp | obj
+	$(CXX) --std=c++17 -c -o $@ -MMD -MF obj/$*.d $<
+
+obj/vector_mod.o:vector_mod.cpp | obj
+	$(CXX) --std=c++20 -c -o $@ -MMD -MF obj/vector_mod.d $<
+
+obj:
+	mkdir -p obj
+$(OUTDIR):
+	mkdir -p $(OUTDIR)
+
+-include $(DEP)

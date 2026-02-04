@@ -9,7 +9,7 @@ gcc -march=native matrix_add.c -o matrix_add
 
 Умножение:
 ```
-gcc -march=native matrix_mul.c -o matrix_mul
+gcc -march=native -fopenmp matrix_mul.c -o matrix_mul
 ./matrix_mul
 ```
 

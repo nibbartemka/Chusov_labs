@@ -10,7 +10,7 @@ make clean
 make
 
 # Bin файл полявится здесь
-lab3/bin/run
+./bin/run
 
 # Запуск:
 # Способ 1: через make

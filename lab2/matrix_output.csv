@@ -1,0 +1,4 @@
+Method,Time,Avg
+matrix_mul,11052.87,733.94
+matrix_mul_colmajor,11013.76,731.34
+matrix_mul_avx256,4822.13,318.64

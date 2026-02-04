@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <string.h>
 #include <math.h>
+#include <omp.h>
 
 #define R_DIM 512   // Количество строк матрицы A и D
 #define N_DIM 512   // Внутренняя размерность (столбцы A, строки B)

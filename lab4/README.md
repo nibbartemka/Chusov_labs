@@ -6,7 +6,7 @@
 make clean
 make
 
-lab4/bin/run
+./bin/run
 
 make run
 ```

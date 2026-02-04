@@ -26,8 +26,8 @@ void speedtest_mul_matrix(
     char filename[256];
     snprintf(filename, sizeof(filename), "%s.csv", name);
 
-    // FILE* output = fopen("matrix_output.csv", "a");
-    FILE* output = fopen(filename, "w");
+    FILE* output = fopen("matrix_output.csv", "a");
+    // FILE* output = fopen(filename, "w");
     
     if (!output) {
         printf("Error while opening file\n");
@@ -80,7 +80,7 @@ void speedtest_mul_matrix(
     double avg = time_sum / exp_count;
 
     printf(
-        "AVG: Method = %s\t| total experiment time: %.2f ms\t| avg time = %.2f ms\n",
+        "MUL: Method = %s\t| total experiment time: %.2f ms\t| avg time = %.2f ms\n",
         name, total_time, avg
     );
 
@@ -145,19 +145,19 @@ void matrix_mul_avx256(double* D, const double* A, const double* B,
     }
 }
 
-// void create_file() {
-//     FILE* output = fopen("matrix_output.csv", "w");
-//     if (!output) {
-//         printf("Error while opening file\n");
-//         return;
-//     }
-//     fprintf(output, "Method,Time,Avg\n");
-//     fclose(output);
-// }
+void create_file() {
+    FILE* output = fopen("matrix_output.csv", "w");
+    if (!output) {
+        printf("Error while opening file\n");
+        return;
+    }
+    fprintf(output, "Method,Time,Avg\n");
+    fclose(output);
+}
 
 int main() {
     size_t test_count = 15;
-    // create_file();
+    create_file();
     SPEEDTEST(matrix_mul, test_count);
     SPEEDTEST(matrix_mul_colmajor, test_count);
     SPEEDTEST(matrix_mul_avx256, test_count);    
